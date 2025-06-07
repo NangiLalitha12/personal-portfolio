@@ -8,7 +8,8 @@ import PersonalInfoForm from './PersonalInfoForm';
 import ProjectsForm from './ProjectsForm';
 import EducationForm from './EducationForm';
 import SkillsForm from './SkillsForm';
-import { User, Settings, Book, Code } from 'lucide-react';
+import MessagesForm from './MessagesForm';
+import { User, Settings, Book, Code, Mail } from 'lucide-react';
 
 const AdminDashboard: React.FC = () => {
   const { logout } = useAuth();
@@ -38,7 +39,7 @@ const AdminDashboard: React.FC = () => {
           </div>
 
           <Tabs defaultValue="personal" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-4 bg-white/10 backdrop-blur-lg">
+            <TabsList className="grid w-full grid-cols-5 bg-white/10 backdrop-blur-lg">
               <TabsTrigger value="personal" className="data-[state=active]:bg-white/20">
                 <User className="h-4 w-4 mr-2" />
                 Personal Info
@@ -54,6 +55,10 @@ const AdminDashboard: React.FC = () => {
               <TabsTrigger value="skills" className="data-[state=active]:bg-white/20">
                 <Settings className="h-4 w-4 mr-2" />
                 Skills
+              </TabsTrigger>
+              <TabsTrigger value="messages" className="data-[state=active]:bg-white/20">
+                <Mail className="h-4 w-4 mr-2" />
+                Messages
               </TabsTrigger>
             </TabsList>
 
@@ -71,6 +76,10 @@ const AdminDashboard: React.FC = () => {
 
             <TabsContent value="skills">
               <SkillsForm />
+            </TabsContent>
+
+            <TabsContent value="messages">
+              <MessagesForm />
             </TabsContent>
           </Tabs>
         </motion.div>

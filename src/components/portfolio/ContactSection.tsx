@@ -9,6 +9,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { Mail } from 'lucide-react';
+import { db } from '@/lib/firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 const ContactSection: React.FC = () => {
   const { portfolioData } = usePortfolio();
@@ -30,15 +32,29 @@ const ContactSection: React.FC = () => {
     e.preventDefault();
     setLoading(true);
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      // Store the message in Firebase
+      await addDoc(collection(db, 'messages'), {
+        ...formData,
+        timestamp: serverTimestamp(),
+        read: false
+      });
+
       toast({
         title: 'Message sent!',
         description: 'Thank you for your message. I\'ll get back to you soon.',
       });
       setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      console.error('Error sending message:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to send message. Please try again.',
+        variant: 'destructive'
+      });
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   };
 
   return (
