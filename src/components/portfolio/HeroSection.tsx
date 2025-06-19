@@ -13,6 +13,11 @@ const HeroSection: React.FC = () => {
     nextSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    contactSection?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section className="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-hidden">
       {/* Animated background elements */}
@@ -100,12 +105,12 @@ const HeroSection: React.FC = () => {
               >
                 View My Work
               </button>
-              <a
-                href={`mailto:${personalInfo.email}`}
+              <button
+                onClick={scrollToContact}
                 className="px-8 py-3 border border-white/20 text-white rounded-full font-semibold backdrop-blur-sm hover:bg-white/10 transition-all duration-300"
               >
                 Get In Touch
-              </a>
+              </button>
             </motion.div>
           </motion.div>
 
